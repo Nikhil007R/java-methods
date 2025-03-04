@@ -1,0 +1,33 @@
+import java.util.Scanner;
+
+public class QuotientAndRemainder {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Taking input for number and divisor
+        System.out.print("Enter the dividend: ");
+        int number = sc.nextInt();
+
+        System.out.print("Enter the divisor: ");
+        int divisor = sc.nextInt();
+
+        // Validate divisor (it cannot be zero)
+        if (divisor == 0) {
+            System.out.println("Division by zero is not allowed.");
+        } else {
+            // Call method to find quotient and remainder
+            int[] result = findRemainderAndQuotient(number, divisor);
+
+            // Display results
+            System.out.println("Quotient: " + result[0]);
+            System.out.println("Remainder: " + result[1]);
+        }
+    }
+
+    // Method to calculate quotient and remainder
+    public static int[] findRemainderAndQuotient(int number, int divisor) {
+        int quotient = number / divisor;
+        int remainder = number % divisor;
+        return new int[]{quotient, remainder};
+    }
+}

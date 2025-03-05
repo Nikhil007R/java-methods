@@ -18,6 +18,48 @@ class NumberChecker {
         return digits;
     }
 
+    // Method to check if a number is Prime
+    public static boolean isPrime(int num) {
+        if (num <= 1)
+            return false;
+        for (int i = 2; i * i <= num; i++) {
+            if (num % i == 0)
+                return false;
+        }
+        return true;
+    }
+
+    // Method to check if a number is a Neon Number
+    public static boolean isNeonNumber(int num) {
+        int square = num * num;
+        int sum = sumOfDigits(square);
+        return sum == num;
+    }
+
+    // Method to check if a number is a Spy Number
+    public static boolean isSpyNumber(int num) {
+        int sum = sumOfDigits(num);
+        int product = 1;
+        int[] digits = getDigitsArray(num);
+        for (int digit : digits) {
+            product *= digit;
+        }
+        return sum == product;
+    }
+
+    // Method to check if a number is an Automorphic Number
+    public static boolean isAutomorphicNumber(int num) {
+        int square = num * num;
+        String numStr = String.valueOf(num);
+        String squareStr = String.valueOf(square);
+        return squareStr.endsWith(numStr);
+    }
+
+    // Method to check if a number is a Buzz Number
+    public static boolean isBuzzNumber(int num) {
+        return num % 7 == 0 || num % 10 == 7;
+    }
+
     // Method to reverse the digits array
     public static int[] reverseDigitsArray(int[] digits) {
         int[] reversed = new int[digits.length];
@@ -153,6 +195,12 @@ class NumberChecker {
         System.out.println("Sum of squares of digits: " + sumOfSquaresOfDigits(num));
         System.out.println("Is Harshad Number? " + isHarshadNumber(num));
 
+        System.out.println("Is Prime Number? " + isPrime(num));
+        System.out.println("Is Neon Number? " + isNeonNumber(num));
+        System.out.println("Is Spy Number? " + isSpyNumber(num));
+        System.out.println("Is Automorphic Number? " + isAutomorphicNumber(num));
+        System.out.println("Is Buzz Number? " + isBuzzNumber(num));
+
         int[][] frequency = digitFrequency(num);
         System.out.println("Digit Frequency:");
         for (int i = 0; i < 10; i++) {
@@ -160,5 +208,7 @@ class NumberChecker {
                 System.out.println("Digit " + frequency[i][0] + ": " + frequency[i][1] + " times");
             }
         }
+
+        sc.close();
     }
 }

@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.util.Arrays;
 
 class NumberChecker {
 
@@ -17,10 +18,35 @@ class NumberChecker {
         return digits;
     }
 
-    // Method to check if a number is a Duck Number
-    public static boolean isDuckNumber(int num) {
-        String numStr = String.valueOf(num);
-        return numStr.contains("0") && numStr.charAt(0) != '0';
+    // Method to reverse the digits array
+    public static int[] reverseDigitsArray(int[] digits) {
+        int[] reversed = new int[digits.length];
+        for (int i = 0; i < digits.length; i++) {
+            reversed[i] = digits[digits.length - 1 - i];
+        }
+        return reversed;
+    }
+
+    // Method to compare two arrays and check if they are equal
+    public static boolean areArraysEqual(int[] arr1, int[] arr2) {
+        return Arrays.equals(arr1, arr2);
+    }
+
+    // Method to check if a number is a Palindrome
+    public static boolean isPalindrome(int num) {
+        int[] digits = getDigitsArray(num);
+        int[] reversed = reverseDigitsArray(digits);
+        return areArraysEqual(digits, reversed);
+    }
+
+    // Method to check if a number is a Duck Number using digits array
+    public static boolean isDuckNumber(int[] digits) {
+        for (int i = 1; i < digits.length; i++) { // Skip first digit
+            if (digits[i] == 0) {
+                return true;
+            }
+        }
+        return false;
     }
 
     // Method to check if a number is an Armstrong Number
@@ -66,7 +92,7 @@ class NumberChecker {
         System.out.println("Second Smallest Digit: " + secondSmallest);
     }
 
-// Method to find the sum of the digits of a number
+    // Method to find the sum of the digits of a number
     public static int sumOfDigits(int num) {
         int sum = 0;
         int[] digits = getDigitsArray(num);
@@ -113,17 +139,20 @@ class NumberChecker {
         System.out.print("Enter a number: ");
         int num = sc.nextInt();
 
+        int[] digits = getDigitsArray(num);
+
         System.out.println("Number of digits: " + countDigits(num));
-        System.out.println("Is Duck Number? " + isDuckNumber(num));
+        System.out.println("Is Duck Number? " + isDuckNumber(digits));
         System.out.println("Is Armstrong Number? " + isArmstrong(num));
+        System.out.println("Is Palindrome? " + isPalindrome(num));
 
         findLargestAndSecondLargest(num);
         findSmallestAndSecondSmallest(num);
-	
-	System.out.println("Sum of digits: " + sumOfDigits(num));
+
+        System.out.println("Sum of digits: " + sumOfDigits(num));
         System.out.println("Sum of squares of digits: " + sumOfSquaresOfDigits(num));
         System.out.println("Is Harshad Number? " + isHarshadNumber(num));
-        
+
         int[][] frequency = digitFrequency(num);
         System.out.println("Digit Frequency:");
         for (int i = 0; i < 10; i++) {

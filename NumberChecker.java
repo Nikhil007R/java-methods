@@ -3,6 +3,117 @@ import java.util.Arrays;
 
 class NumberChecker {
 
+    // Method to find factors of a number and return them as an array
+    public static int[] findFactors(int num) {
+        int count = 0;
+
+        // First loop to count the number of factors
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                count++;
+            }
+        }
+
+        int[] factors = new int[count]; // Creating array of required size
+        int index = 0;
+
+        // Second loop to store factors in the array
+        for (int i = 1; i <= num; i++) {
+            if (num % i == 0) {
+                factors[index++] = i;
+            }
+        }
+
+        return factors;
+    }
+
+    // Method to find the greatest factor of a number (excluding itself)
+    public static int findGreatestFactor(int[] factors) {
+        return factors[factors.length - 2]; // Second last element is the greatest proper factor
+    }
+
+    // Method to find sum of factors
+    public static int sumOfFactors(int[] factors) {
+        int sum = 0;
+        for (int factor : factors) {
+            sum += factor;
+        }
+        return sum;
+    }
+
+    // Method to find the product of factors
+    public static long productOfFactors(int[] factors) {
+        long product = 1;
+        for (int factor : factors) {
+            product *= factor;
+        }
+        return product;
+    }
+
+    // Method to find the product of cubes of factors
+    public static double productOfCubesOfFactors(int[] factors) {
+        double product = 1;
+        for (int factor : factors) {
+            product *= Math.pow(factor, 3);
+        }
+        return product;
+    }
+
+    // Method to check if a number is a Perfect Number
+    public static boolean isPerfectNumber(int num) {
+        int sum = 0;
+        for (int i = 1; i < num; i++) { // Exclude the number itself
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+        return sum == num;
+    }
+
+    // Method to check if a number is an Abundant Number
+    public static boolean isAbundantNumber(int num) {
+        int sum = 0;
+        for (int i = 1; i < num; i++) { // Exclude the number itself
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+        return sum > num;
+    }
+
+    // Method to check if a number is a Deficient Number
+    public static boolean isDeficientNumber(int num) {
+        int sum = 0;
+        for (int i = 1; i < num; i++) { // Exclude the number itself
+            if (num % i == 0) {
+                sum += i;
+            }
+        }
+        return sum < num;
+    }
+
+    // Method to check if a number is a Strong Number
+    public static boolean isStrongNumber(int num) {
+        int originalNum = num;
+        int sum = 0;
+
+        while (num > 0) {
+            int digit = num % 10;
+            sum += factorial(digit);
+            num /= 10;
+        }
+        return sum == originalNum;
+    }
+
+    // Helper method to calculate factorial of a digit
+    private static int factorial(int n) {
+        int fact = 1;
+        for (int i = 2; i <= n; i++) {
+            fact *= i;
+        }
+        return fact;
+    }
+
     // Method to count the digits in a number
     public static int countDigits(int num) {
         return String.valueOf(num).length();
@@ -209,6 +320,28 @@ class NumberChecker {
             }
         }
 
-        sc.close();
+        int[] factors = findFactors(num);
+        System.out.print("Factors of " + num + ": ");
+        for (int factor : factors) {
+            System.out.print(factor + " ");
+        }
+        System.out.println();
+
+        // Find greatest factor
+        System.out.println("Greatest proper factor: " + findGreatestFactor(factors));
+
+        // Find sum and product of factors
+        System.out.println("Sum of factors: " + sumOfFactors(factors));
+        System.out.println("Product of factors: " + productOfFactors(factors));
+
+        // Find product of cubes of factors
+        System.out.println("Product of cubes of factors: " + productOfCubesOfFactors(factors));
+
+        // Check different number properties
+        System.out.println("Is Perfect Number? " + isPerfectNumber(num));
+        System.out.println("Is Abundant Number? " + isAbundantNumber(num));
+        System.out.println("Is Deficient Number? " + isDeficientNumber(num));
+        System.out.println("Is Strong Number? " + isStrongNumber(num));
+
     }
 }
